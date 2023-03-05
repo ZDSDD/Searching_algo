@@ -1,10 +1,10 @@
-#include "main.cpp"
+#include "search_algs.h"
 
 
 
 int main() {
-    char txt[] = "AABAACAADAAABCBAAABAAABCC";
-    char pat[] = "AAA";
+    char txt[] = "AACBACCACAADACCCCCCCCCCAACCBCCBCABCCAAACCCCBAAABCC";
+    char pat[] = "CAB";
     NaiveSearch(pat, txt);
     SundaySearch(txt, pat);
     BoyerMooreSearch(txt,pat);

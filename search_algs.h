@@ -1,7 +1,8 @@
+#ifndef SEARCH_ALGS
+#define SEARCH_ALGS
 #include <iostream>
 #include <cstring>
 #include <map>
-
 using std::string;
 using std::cout;
 using std::endl;
@@ -67,24 +68,14 @@ void SundaySearch(string text, string pattern) {
     }
 }
 
-# define NO_OF_CHARS 256
-
-void badCharHeuristic(const string & str,const int & size,int badchar[NO_OF_CHARS]) {
-    int i;
-    // Initialize all occurrences as -1
-    for (i = 0; i < NO_OF_CHARS; i++)
-        badchar[i] = -1;
-    for (i = 0; i < size; i++)
-        badchar[(int) str[i]] = i;
-}
 
 void BoyerMooreSearch(const string & txt,const string & pat) {
     int patt_len = pat.size();
     int txt_len = txt.size();
 
-    int badchar[NO_OF_CHARS];
-    badCharHeuristic(pat, patt_len, badchar);
-
+    std::map<char, int> mapping;
+    for (int i = 0; i < patt_len; ++i)
+        mapping[pat[i]] = i;
     int p = 0; // p is shift of the pattern with
     while (p <= (txt_len - patt_len)) {
         int j = patt_len - 1;
@@ -92,9 +83,9 @@ void BoyerMooreSearch(const string & txt,const string & pat) {
             j--;
         if (j < 0) {
             cout << "pattern occurs at shift = " << p << endl;
-            p += (p + patt_len < txt_len) ? patt_len - badchar[txt[p + patt_len]] : 1;
+            p += (p + patt_len < txt_len) ? patt_len - mapping[txt[p + patt_len]] : 1;
         } else
-            p += std::max(1, j - badchar[txt[p + j]]);
+            p += std::max(1, j - mapping[txt[p + j]]);
     }
 }
-
+#endif //SEARCH_ALGS

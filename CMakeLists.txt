@@ -3,4 +3,4 @@ project(Projekt1)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Projekt1 main.cpp test.cpp)
+add_executable(Projekt1 test.cpp search_algs.h)
